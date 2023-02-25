@@ -66,6 +66,12 @@
               "browserTarget": "oauth2-azure-angular-starter:build:development"
             }
           },
+          "options": {
+            "browserTarget": "oauth2-azure-angular-starter:build",
+            "ssl": true,
+            "sslCert": "webserver.crt",
+            "sslKey": "webserver.key"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
