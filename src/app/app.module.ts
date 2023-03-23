@@ -11,9 +11,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular'; 
+import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
-import { ResponseOidcComponent } from './response-oidc/response-oidc.component'; 
+import { ResponseOidcComponent } from './response-oidc/response-oidc.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -37,7 +37,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         authority: 'https://login.microsoftonline.com/97d05d42-fc66-4adf-913f-d397759b6372', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
         redirectUri: 'https://localhost:4200/response-oidc', // This is your redirect URI
         navigateToLoginRequestUrl: false, // Ensures we navigate back to redirectUri
-        postLogoutRedirectUri: 'https://localhost:4200',
+        postLogoutRedirectUri: 'https://localhost:4200', //TODO: Same as redirectUri
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -47,14 +47,15 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
       authRequest: {
         scopes: [
-          'user.read',
+          // 'user.read',
           'api://0de01329-010d-4283-bd48-34cad2c07748/access_as_user'
         ]
       }
     }, {
       interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
-      protectedResourceMap: new Map([ 
-          ['https://graph.microsoft.com/v1.0/me', ['user.read']]
+      protectedResourceMap: new Map([
+          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
+          ['https://localhost:7269/api', ['api://0de01329-010d-4283-bd48-34cad2c07748/access_as_user']]
       ])
     })
   ],
