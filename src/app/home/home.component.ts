@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   setLoginDisplay() {
+    console.log(this.authService.instance.getAllAccounts());
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
 }
