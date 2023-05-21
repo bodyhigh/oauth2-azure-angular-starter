@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from '../services/user.service';
+import { UserProfileModel, UserService } from '../services/user.service';
 import { take } from 'rxjs';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
@@ -31,15 +31,16 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile() {
-    this.userService.getProfile('f51b0282-5a55-4c98-a50e-8cb5e256bc11')
+    this.userService.getUserProfile<UserProfileModel>('f51b0282-5a55-4c98-a50e-8cb5e256bc11')
       .pipe(take(1))
-      .subscribe(profile => {
-        console.log(profile);
+      .subscribe(model => {
+        console.log("PROFILE COMPONENT");
+        console.log(model);
         this.profile = {
-          givenName: profile.firstName,
-          surname: profile.lastName,
-          userPrincipalName: profile.email,
-          id: profile.id
+          givenName: model.firstName,
+          surname: model.lastName,
+          userPrincipalName: model.email,
+          id: model.id
         };
       })
   }
