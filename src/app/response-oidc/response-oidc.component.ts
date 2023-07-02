@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-response-oidc',
@@ -6,8 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./response-oidc.component.css']
 })
 export class ResponseOidcComponent {
-  constructor() {
+  constructor(private router: Router) {
     console.log('Do stuff with the response before redirecting home');
-    
+
+    this.redirectHome();
+  }
+
+  redirectHome() {
+    this.router.navigate(['']);
   }
 }
