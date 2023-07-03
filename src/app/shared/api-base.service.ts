@@ -39,15 +39,10 @@ export class ApiBaseService {
 
     return Observable.create((observer: Observer) => {
       response.subscribe(response => {
-        console.log("HELLO 1");
-        console.log(response);
-
         if (response.errors && response.errors.length > 0) {
-          console.log("HELLO 2");
+          // console.error(response.errors);
           observer.error(response.errors);
         } else {
-          console.log("HELLO 3");
-          // observer.next(response.success); //This was wrong
           observer.next(response);
         }
         observer.complete();
@@ -97,4 +92,4 @@ export class ApiBaseService {
 
   }
 
-  }
+}

@@ -18,12 +18,6 @@ export class ResponseOidcComponent implements OnInit, OnDestroy{
   ngOnInit() {
     console.log('Do stuff with the response before redirecting home');
     this.onAccountInfoLoad();
-
-    // setTimeout(() => {
-    //   console.log('TIMEOUT COMPLETE');
-    //   this.redirectOnComplete();
-
-    // }, 5000);
   }
 
   ngOnDestroy(): void {
