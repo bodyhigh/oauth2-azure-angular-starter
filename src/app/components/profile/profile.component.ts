@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserProfileModel, UserService } from '../services/user.service';
 import { take } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { UserProfileModel } from 'src/app/models/user-profile.model';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 

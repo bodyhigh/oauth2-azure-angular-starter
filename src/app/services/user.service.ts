@@ -3,16 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiBaseService } from '../shared/api-base.service';
 
-export interface UserProfileModel
-{
-  id: string,
-  userName: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  roles?: string[]
-}
-
 @Injectable({
   providedIn: 'root'
 })

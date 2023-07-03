@@ -8,12 +8,13 @@ import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
-import { ResponseOidcComponent } from './response-oidc/response-oidc.component';
+import { ResponseOidcComponent } from './components/response-oidc/response-oidc.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -22,7 +23,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    ResponseOidcComponent
+    ResponseOidcComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

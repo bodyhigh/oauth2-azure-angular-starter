@@ -12,6 +12,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'msal-angular-tutorial';
   isIframe = false;
+  isLoggedIn = false;
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
 
@@ -38,16 +39,32 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  logout() { 
+  logout() {
     this.authService.logoutRedirect();
   }
 
   setLoginDisplay() {
+    console.log("START [setLoginDisplay]");
+    let accountCount = this.authService.instance.getAllAccounts().length;
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+    this.isLoggedIn = accountCount > 0;
+    console.log(`accountCount: ${accountCount}`);
+    console.log("END [setLoginDisplay]");
   }
 
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
     this._destroying$.complete();
   }
+
+  // foo() {
+  //   this.broadcastService.inProgress$
+  //   .pipe(
+  //     // filter((status: InteractionStatus) => status === InteractionStatus.None),
+  //     takeUntil(this._destroying$)
+  //   )
+  //   .subscribe((status: InteractionStatus) => {
+  //     console.log(`STATUS: ${status}`);
+  //   })
+  // }
 }
