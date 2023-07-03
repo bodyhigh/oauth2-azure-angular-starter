@@ -10,7 +10,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'msal-angular-tutorial';
+  title = 'OAuth2 Azure Starter';
   isIframe = false;
   isLoggedIn = false;
   loginDisplay = false;

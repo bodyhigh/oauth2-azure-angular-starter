@@ -1,0 +1,14 @@
+.flex-container {
+  margin: 30px;
+  min-height: 300px;
+  display: flex;
+  /* border: 1px solid black; */
+  justify-content: center; /* align item horizontally */
+  align-items: center; /* align item vertically */
+
+  p {
+    width: 100px;
+    padding: 20px;
+    background: #b4bac0;
+  }
+}

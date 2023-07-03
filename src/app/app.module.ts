@@ -15,6 +15,7 @@ import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { ResponseOidcComponent } from './components/response-oidc/response-oidc.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { environment } from 'src/environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -35,8 +36,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
-        clientId: 'c850a148-0b05-4868-ab0b-4f04b66df001', // Application (client) ID from the app registration
-        authority: 'https://login.microsoftonline.com/97d05d42-fc66-4adf-913f-d397759b6372', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+        clientId: environment.auth.clientId, // Application (client) ID from the app registration
+        authority: environment.auth.authority, // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
         redirectUri: 'https://localhost:4200/response-oidc', // This is your redirect URI
         navigateToLoginRequestUrl: false, // Ensures we navigate back to redirectUri
         postLogoutRedirectUri: 'https://localhost:4200', //TODO: Same as redirectUri
@@ -49,16 +50,17 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
       authRequest: {
         scopes: [
-          // 'user.read',
-          'api://0de01329-010d-4283-bd48-34cad2c07748/access_as_user'
+          environment.auth.scopes.user_read,
+          environment.auth.scopes.access_as_user
         ]
       }
     }, {
       interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
       protectedResourceMap: new Map([
-          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
-          ['https://localhost:7269/api', ['api://0de01329-010d-4283-bd48-34cad2c07748/access_as_user']]
+        ['https://graph.microsoft.com/v1.0/me', [environment.auth.scopes.user_read]],
+        [environment.apiUrlRoot, [environment.auth.scopes.access_as_user]]
       ])
+
     })
   ],
   providers: [

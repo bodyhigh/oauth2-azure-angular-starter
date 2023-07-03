@@ -25,11 +25,6 @@ export class ResponseOidcComponent implements OnInit, OnDestroy{
     this._destroying$.complete();
   }
 
-  redirectOnComplete(): void {
-    console.log("redirectOnComplete");
-    this.router.navigate(['dashboard']);
-  };
-
   onAccountInfoLoad() {
     this.broadcastService.inProgress$
     .pipe(
@@ -37,11 +32,11 @@ export class ResponseOidcComponent implements OnInit, OnDestroy{
       takeUntil(this._destroying$)
     )
     .subscribe((status: InteractionStatus) => {
-      console.log(`OIDC STATUS: ${status}`);
-      console.log(`OIDC accountCount: ${this.authService.instance.getAllAccounts().length}`);
 
       if (this.authService.instance.getAllAccounts().length > 0) {
-        this.redirectOnComplete();
+        this.router.navigate(['dashboard']);
+      } else {
+        console.warn('getAllAccounts returned 0');
       }
     })
   }
